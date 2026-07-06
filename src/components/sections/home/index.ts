@@ -1,0 +1,12 @@
+export { HomeConnect } from "./home-connect";
+export { HomeDevotional } from "./home-devotional";
+export { HomeDonations } from "./home-donations";
+export { HomeEvents } from "./home-events";
+export { HomeFinalCta } from "./home-final-cta";
+export { HomeHistory } from "./home-history";
+export { HomeMinistries } from "./home-ministries";
+export { HomeMission } from "./home-mission";
+export { HomeTestimonials } from "./home-testimonials";
+export { HomeVisit } from "./home-visit";
+export { HomeWelcome } from "./home-welcome";
+export { HomeYouTube } from "./home-youtube";
