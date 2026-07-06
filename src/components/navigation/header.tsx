@@ -206,12 +206,11 @@ function Header() {
             <div className="relative z-10 flex shrink-0 items-center gap-1.5 lg:hidden">
               <Button
                 asChild
-                variant="outline"
+                variant="primary"
                 size="sm"
                 className={cn(
-                  "hidden min-[380px]:inline-flex",
-                  isTransparent &&
-                    "border-white/30 bg-white/10 text-white hover:bg-white/20 hover:text-white",
+                  "hidden min-[380px]:inline-flex shadow-sm",
+                  isTransparent && "shadow-lg shadow-black/10",
                 )}
               >
                 <Link href={donateNavItem.href}>{donateNavItem.label}</Link>
