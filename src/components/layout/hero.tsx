@@ -164,7 +164,7 @@ function HeroOverlay() {
   );
 }
 
-function HeroLogo() {
+function HeroLogoDesktop() {
   return (
     <div
       data-hero-item
@@ -178,6 +178,24 @@ function HeroLogo() {
         height={96}
         priority
         className="h-auto w-full object-contain drop-shadow-[0_8px_24px_rgba(0,0,0,0.45)]"
+      />
+    </div>
+  );
+}
+
+function HeroLogoMobile() {
+  return (
+    <div
+      aria-hidden
+      className="relative mt-1 aspect-[5/4] w-[5.25rem] shrink-0 sm:mt-0.5 sm:w-24 lg:hidden"
+    >
+      <Image
+        src={church.logoWhite}
+        alt=""
+        fill
+        priority
+        sizes="96px"
+        className="object-contain object-top drop-shadow-[0_6px_18px_rgba(0,0,0,0.45)]"
       />
     </div>
   );
@@ -282,14 +300,25 @@ function Hero({
       <MaxWidthContainer className="relative z-10 flex min-h-svh flex-col justify-center pb-36 pt-[calc(var(--header-height)+2.5rem)] md:pb-40 md:pt-[calc(var(--header-height)+3.5rem)] lg:max-w-[calc(100%-22rem)]">
         <div className="w-full max-w-3xl text-left xl:max-w-4xl">
           <h1 data-hero-item className="font-montserrat font-black tracking-tight">
-            <span className={cn(titleLineClass, "text-white")}>{titleLine1}</span>
             {titleLine3 ? (
               <>
-                <span className={cn(titleLineClass, "text-white")}>{titleLine2}</span>
+                <div className="flex items-start gap-2 sm:gap-3 lg:block">
+                  <div className="min-w-0 flex-1">
+                    <span className={cn(titleLineClass, "text-white")}>{titleLine1}</span>
+                    <span className={cn(titleLineClass, "text-white")}>{titleLine2}</span>
+                  </div>
+                  <HeroLogoMobile />
+                </div>
                 <span className={cn(titleLineClass, "text-primary")}>{titleLine3}</span>
               </>
             ) : (
-              <span className={cn(titleLineClass, "text-primary")}>{titleLine2}</span>
+              <div className="flex items-start gap-2 sm:gap-3 lg:block">
+                <div className="min-w-0 flex-1">
+                  <span className={cn(titleLineClass, "text-white")}>{titleLine1}</span>
+                  <span className={cn(titleLineClass, "text-primary")}>{titleLine2}</span>
+                </div>
+                <HeroLogoMobile />
+              </div>
             )}
           </h1>
 
@@ -334,7 +363,7 @@ function Hero({
         <HeroSchedule />
       </div>
 
-      <HeroLogo />
+      <HeroLogoDesktop />
 
       <div
         ref={scrollRef}

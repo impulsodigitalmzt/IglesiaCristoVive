@@ -95,8 +95,13 @@ function Header() {
                 : "border-border/50 bg-white/65 shadow-md backdrop-blur-xl supports-[backdrop-filter]:bg-white/55",
             )}
           >
-          <div className="flex h-[var(--header-height)] min-w-0 items-center justify-between gap-2 px-3 sm:gap-4 sm:px-5">
-            <NavLogo transparent={isTransparent} className="min-w-0" />
+          <div className="relative flex h-[var(--header-height)] min-w-0 items-center justify-between gap-2 px-3 sm:gap-4 sm:px-5">
+            <NavLogo transparent={isTransparent} className="relative z-10 shrink-0" />
+
+            <SocialLinks
+              transparent={isTransparent}
+              className="absolute top-1/2 left-1/2 z-[1] -translate-x-1/2 -translate-y-1/2 gap-0.5 lg:hidden [&_a]:size-9"
+            />
 
             <nav
               aria-label="Navegación principal"
@@ -198,7 +203,7 @@ function Header() {
               </Button>
             </nav>
 
-            <div className="flex shrink-0 items-center gap-1.5 lg:hidden">
+            <div className="relative z-10 flex shrink-0 items-center gap-1.5 lg:hidden">
               <Button
                 asChild
                 variant="outline"
