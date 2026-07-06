@@ -1,5 +1,5 @@
 import { imageAssets } from "./images";
-import { heroVideoLite, videoAssets } from "./videos";
+import { HERO_VIDEO_URL, videoAssets } from "./videos";
 
 export const church = {
   name: "Iglesia Cristo Vive",
@@ -25,8 +25,8 @@ export const church = {
     sunday: "Domingo 10:00 AM y 12:00 PM",
     wednesday: "Miércoles 7:00 PM",
   },
-  heroVideo: videoAssets.hero,
-  heroVideoLite: heroVideoLite,
+  heroVideo: HERO_VIDEO_URL,
+  heroVideoLite: HERO_VIDEO_URL,
   heroPoster: imageAssets.hero,
   logoWhite: imageAssets.logoWhite,
   logoGray: imageAssets.logoGray,
