@@ -18,6 +18,8 @@ type HeroCta = {
 
 type HeroProps = {
   videoSrc?: string;
+  videoSrcLite?: string;
+  posterSrc?: string;
   titleLine1?: string;
   titleLine2?: string;
   titleLine3?: string;
@@ -40,19 +42,110 @@ const defaultSecondaryCta: HeroCta = {
 const titleLineClass =
   "block font-montserrat text-[clamp(2.25rem,9vw,7rem)] font-bold leading-[0.95] tracking-tight";
 
-function HeroVideo({ src }: { src: string }) {
+type NavigatorConnection = Navigator & {
+  connection?: {
+    saveData?: boolean;
+    effectiveType?: string;
+  };
+};
+
+function shouldSkipHeroVideo() {
+  if (typeof window === "undefined") return true;
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return true;
+
+  const connection = (navigator as NavigatorConnection).connection;
+  if (connection?.saveData) return true;
+  if (connection?.effectiveType === "slow-2g" || connection?.effectiveType === "2g") {
+    return true;
+  }
+
+  return false;
+}
+
+function pickHeroVideoSrc(fullSrc: string, liteSrc?: string) {
+  if (typeof window === "undefined") return null;
+
+  const isMobile = window.matchMedia("(max-width: 767px)").matches;
+  if (isMobile) return liteSrc ?? null;
+
+  return liteSrc ?? fullSrc;
+}
+
+function HeroVideo({
+  src,
+  liteSrc,
+  poster,
+}: {
+  src: string;
+  liteSrc?: string;
+  poster: string;
+}) {
+  const videoRef = React.useRef<HTMLVideoElement>(null);
+  const [videoSrc, setVideoSrc] = React.useState<string | null>(null);
+  const [videoReady, setVideoReady] = React.useState(false);
+
+  React.useEffect(() => {
+    if (shouldSkipHeroVideo()) return;
+
+    const chosenSrc = pickHeroVideoSrc(src, liteSrc);
+    if (!chosenSrc) return;
+
+    const startLoading = () => setVideoSrc(chosenSrc);
+
+    if (typeof window.requestIdleCallback === "function") {
+      const id = window.requestIdleCallback(startLoading, { timeout: 2500 });
+      return () => window.cancelIdleCallback(id);
+    }
+
+    const timer = globalThis.setTimeout(startLoading, 800);
+    return () => globalThis.clearTimeout(timer);
+  }, [src, liteSrc]);
+
+  React.useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !videoSrc) return;
+
+    const handleCanPlay = () => setVideoReady(true);
+
+    video.addEventListener("canplay", handleCanPlay);
+    video.load();
+    void video.play().catch(() => {});
+
+    return () => video.removeEventListener("canplay", handleCanPlay);
+  }, [videoSrc]);
+
   return (
-    <video
-      autoPlay
-      loop
-      muted
-      playsInline
-      preload="metadata"
-      aria-hidden
-      className="absolute inset-0 size-full object-cover"
-    >
-      <source src={src} type="video/mp4" />
-    </video>
+    <>
+      <Image
+        src={poster}
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className={cn(
+          "object-cover transition-opacity duration-700",
+          videoReady ? "opacity-0" : "opacity-100",
+        )}
+      />
+      {videoSrc ? (
+        <video
+          ref={videoRef}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="none"
+          aria-hidden
+          className={cn(
+            "absolute inset-0 size-full object-cover transition-opacity duration-700",
+            videoReady ? "opacity-100" : "opacity-0",
+          )}
+        >
+          <source src={videoSrc} type="video/mp4" />
+        </video>
+      ) : null}
+    </>
   );
 }
 
@@ -119,6 +212,8 @@ function HeroSchedule() {
 
 function Hero({
   videoSrc = church.heroVideo,
+  videoSrcLite = church.heroVideoLite,
+  posterSrc = church.heroPoster,
   titleLine1 = "CRISTO",
   titleLine2 = "VIVE",
   titleLine3,
@@ -176,8 +271,8 @@ function Hero({
         className,
       )}
     >
-      <div data-slot="hero-media" className="absolute inset-0 -z-20" aria-hidden>
-        <HeroVideo src={videoSrc} />
+      <div data-slot="hero-media" className="absolute inset-0 -z-20 size-full" aria-hidden>
+        <HeroVideo src={videoSrc} liteSrc={videoSrcLite} poster={posterSrc} />
       </div>
 
       <div data-slot="hero-overlay" className="absolute inset-0" aria-hidden>

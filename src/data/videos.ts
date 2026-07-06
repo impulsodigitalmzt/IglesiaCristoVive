@@ -1,18 +1,24 @@
+const SUPABASE_VIDEOS_BASE =
+  "https://ymzqxpmiuoqbcsovwgaq.supabase.co/storage/v1/object/public/Videos/Videos";
+
 export const videoAssets = {
-  hero: "/videos/inicio1.mp4",
-  welcome: "/videos/saludos.mp4",
-  service: "/videos/servicio.mp4",
-  baptisms: "/videos/bautismos.mp4",
-  communityService: "/videos/serv%20comunitario.mp4",
-  salvation: "/videos/la%20salvacion.mp4",
-  reflection: "/videos/reflexion.mp4",
-  women: "/videos/mujeres.mp4",
-  womenCamp: "/videos/camp%20mujeres.mp4",
-  congregacion: "/videos/congregacion.mp4",
-  personalChurch: "/videos/personal%20iglesia.mp4",
-  kidsMinistry: "/videos/ni%C3%B1os.mp4",
-  youthMinistry: "/videos/jovenes.mp4",
+  hero: `${SUPABASE_VIDEOS_BASE}/inicio1.mp4`,
+  welcome: `${SUPABASE_VIDEOS_BASE}/saludos.mp4`,
+  service: `${SUPABASE_VIDEOS_BASE}/servicio.mp4`,
+  baptisms: `${SUPABASE_VIDEOS_BASE}/bautismos.mp4`,
+  communityService: `${SUPABASE_VIDEOS_BASE}/serv%20comunitario.mp4`,
+  salvation: `${SUPABASE_VIDEOS_BASE}/la%20salvacion.mp4`,
+  reflection: `${SUPABASE_VIDEOS_BASE}/reflexion.mp4`,
+  women: `${SUPABASE_VIDEOS_BASE}/mujeres.mp4`,
+  womenCamp: `${SUPABASE_VIDEOS_BASE}/camp%20mujeres.mp4`,
+  congregacion: `${SUPABASE_VIDEOS_BASE}/congregacion.mp4`,
+  personalChurch: `${SUPABASE_VIDEOS_BASE}/personal%20iglesia.mp4`,
+  kidsMinistry: `${SUPABASE_VIDEOS_BASE}/ni%C3%B1os.mp4`,
+  youthMinistry: `${SUPABASE_VIDEOS_BASE}/jovenes.mp4`,
 } as const;
+
+/** Misma URL que el hero hasta que subas inicio1-lite.mp4 a Supabase. */
+export const heroVideoLite = videoAssets.hero;
 
 export type VideoAssetKey = keyof typeof videoAssets;
 
