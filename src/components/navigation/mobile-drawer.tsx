@@ -85,7 +85,7 @@ function MobileDrawer({ open, onOpenChange, pathname }: MobileDrawerProps) {
         <div className="min-h-0 flex-1 overflow-y-auto px-4 py-4">
           {featuredVisit ? (
             <Link
-              href={featuredVisit.href}
+            href={featuredVisit?.href ?? "#"}
               onClick={close}
               className="group relative mb-4 block overflow-hidden rounded-[var(--radius-card)] shadow-md"
             >
