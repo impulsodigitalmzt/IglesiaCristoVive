@@ -4,7 +4,8 @@ import { imageAssets } from "./images";
 export const homeHero = {
   titleLine1: "DONDE LO",
   titleLine2: "IMPOSIBLE",
-  titleLine3: "SE HACE POSIBLE",
+  titleLine3: "SE HACE",
+  titleLine4: "POSIBLE",
   subtitle: church.description,
   primaryCta: { label: "Planear mi visita", href: "/planea-tu-visita" },
   secondaryCta: { label: "Ver transmisión", href: "#predicaciones" },

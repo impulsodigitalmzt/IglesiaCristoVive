@@ -23,6 +23,7 @@ type HeroProps = {
   titleLine1?: string;
   titleLine2?: string;
   titleLine3?: string;
+  titleLine4?: string;
   subtitle?: string;
   primaryCta?: HeroCta;
   secondaryCta?: HeroCta;
@@ -187,14 +188,14 @@ function HeroLogoMobile() {
   return (
     <div
       aria-hidden
-      className="relative mt-1 aspect-[5/4] w-[5.25rem] shrink-0 sm:mt-0.5 sm:w-24 lg:hidden"
+      className="relative mt-1 aspect-[5/4] w-[6.75rem] shrink-0 sm:mt-0.5 sm:w-28 lg:hidden"
     >
       <Image
         src={church.logoWhite}
         alt=""
         fill
         priority
-        sizes="96px"
+        sizes="112px"
         className="object-contain object-top drop-shadow-[0_6px_18px_rgba(0,0,0,0.45)]"
       />
     </div>
@@ -235,6 +236,7 @@ function Hero({
   titleLine1 = "CRISTO",
   titleLine2 = "VIVE",
   titleLine3,
+  titleLine4,
   subtitle = "Donde lo imposible se hace posible",
   primaryCta = defaultPrimaryCta,
   secondaryCta = defaultSecondaryCta,
@@ -301,16 +303,30 @@ function Hero({
         <div className="w-full max-w-3xl text-left xl:max-w-4xl">
           <h1 data-hero-item className="font-montserrat font-black tracking-tight">
             {titleLine3 ? (
-              <>
-                <div className="flex items-start gap-2 sm:gap-3 lg:block">
-                  <div className="min-w-0 flex-1">
-                    <span className={cn(titleLineClass, "text-white")}>{titleLine1}</span>
-                    <span className={cn(titleLineClass, "text-white")}>{titleLine2}</span>
+              titleLine4 ? (
+                <>
+                  <div className="flex items-start gap-2 sm:gap-3 lg:block">
+                    <div className="min-w-0 flex-1">
+                      <span className={cn(titleLineClass, "text-white")}>{titleLine1}</span>
+                      <span className={cn(titleLineClass, "text-white")}>{titleLine2}</span>
+                    </div>
+                    <HeroLogoMobile />
                   </div>
-                  <HeroLogoMobile />
-                </div>
-                <span className={cn(titleLineClass, "text-primary")}>{titleLine3}</span>
-              </>
+                  <span className={cn(titleLineClass, "text-primary")}>{titleLine3}</span>
+                  <span className={cn(titleLineClass, "text-primary")}>{titleLine4}</span>
+                </>
+              ) : (
+                <>
+                  <div className="flex items-start gap-2 sm:gap-3 lg:block">
+                    <div className="min-w-0 flex-1">
+                      <span className={cn(titleLineClass, "text-white")}>{titleLine1}</span>
+                      <span className={cn(titleLineClass, "text-white")}>{titleLine2}</span>
+                    </div>
+                    <HeroLogoMobile />
+                  </div>
+                  <span className={cn(titleLineClass, "text-primary")}>{titleLine3}</span>
+                </>
+              )
             ) : (
               <div className="flex items-start gap-2 sm:gap-3 lg:block">
                 <div className="min-w-0 flex-1">
