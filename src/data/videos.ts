@@ -7,6 +7,9 @@ export const HERO_VIDEO_URL =
 export const BAPTISMS_VIDEO_URL =
   "https://ymzqxpmiuoqbcsovwgaq.supabase.co/storage/v1/object/public/Videos/Videos/bautismos.mp4";
 
+export const KIDS_MINISTRY_VIDEO_URL =
+  "https://ymzqxpmiuoqbcsovwgaq.supabase.co/storage/v1/object/public/Videos/Videos/ni%C3%B1os.mp4";
+
 export const videoAssets = {
   hero: HERO_VIDEO_URL,
   welcome: `${SUPABASE_VIDEOS_BASE}/saludos.mp4`,
@@ -19,7 +22,7 @@ export const videoAssets = {
   womenCamp: `${SUPABASE_VIDEOS_BASE}/camp%20mujeres.mp4`,
   congregacion: `${SUPABASE_VIDEOS_BASE}/congregacion.mp4`,
   personalChurch: `${SUPABASE_VIDEOS_BASE}/personal%20iglesia.mp4`,
-  kidsMinistry: `${SUPABASE_VIDEOS_BASE}/ni%C3%B1os.mp4`,
+  kidsMinistry: KIDS_MINISTRY_VIDEO_URL,
   youthMinistry: `${SUPABASE_VIDEOS_BASE}/jovenes.mp4`,
 } as const;
 

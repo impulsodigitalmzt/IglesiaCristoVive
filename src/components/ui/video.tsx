@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 
@@ -78,17 +80,35 @@ function LoopVideo({
   rounded,
   aspect,
 }: LoopVideoProps) {
+  const videoRef = React.useRef<HTMLVideoElement>(null);
+
+  React.useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const play = () => {
+      void video.play().catch(() => {});
+    };
+
+    video.addEventListener("loadeddata", play);
+    play();
+
+    return () => video.removeEventListener("loadeddata", play);
+  }, [src]);
+
   return (
     <div
       data-slot="loop-video"
       className={cn(videoWrapperVariants({ rounded, aspect }), wrapperClassName)}
     >
       <video
+        ref={videoRef}
+        src={src}
         autoPlay
         loop
         muted
         playsInline
-        preload="metadata"
+        preload="auto"
         poster={poster}
         aria-label={title}
         aria-hidden={!title}

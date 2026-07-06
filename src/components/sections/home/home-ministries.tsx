@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowUpRightIcon } from "lucide-react";
 
 import { HoverCard, HoverCardContent, HoverCardTitle } from "@/components/cards/hover-card";
@@ -41,17 +42,25 @@ function HomeMinistries() {
             >
               <HoverCard padding="none" className="group h-full overflow-hidden">
                 <div className="relative min-h-[240px] md:min-h-[260px]">
+                  <Image
+                    src={ministry.image}
+                    alt=""
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover"
+                  />
                   {ministry.video ? (
                     <LoopVideo
                       src={ministry.video}
+                      poster={ministry.image}
                       title={ministry.title}
                       rounded="none"
                       aspect="auto"
-                      wrapperClassName="absolute inset-0 transition-transform duration-700 group-hover:scale-105"
+                      wrapperClassName="absolute inset-0 z-[1] transition-transform duration-700 group-hover:scale-105"
                     />
                   ) : null}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
-                  <HoverCardContent className="absolute inset-x-0 bottom-0 p-5 text-white">
+                  <div className="absolute inset-0 z-[2] bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
+                  <HoverCardContent className="absolute inset-x-0 bottom-0 z-[3] p-5 text-white">
                     <Badge variant="secondary" className="mb-2 bg-white/15 text-white">
                       {ministry.category}
                     </Badge>
