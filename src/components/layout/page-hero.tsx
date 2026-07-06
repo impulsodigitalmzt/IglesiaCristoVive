@@ -33,11 +33,11 @@ function PageHero({ eyebrow, title, description, image, className, id }: PageHer
                 {eyebrow}
               </p>
             ) : null}
-            <h1 className="mt-4 max-w-3xl font-montserrat text-4xl font-black tracking-tight text-primary md:text-5xl lg:text-6xl">
+            <h1 className="mt-4 max-w-3xl text-balance font-montserrat text-3xl font-black tracking-tight text-primary sm:text-4xl md:text-5xl lg:text-6xl">
               {title}
             </h1>
             {description ? (
-              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/80">
+              <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">
                 {description}
               </p>
             ) : null}
@@ -62,7 +62,7 @@ function PageHero({ eyebrow, title, description, image, className, id }: PageHer
         {eyebrow ? (
           <p className="text-xs font-semibold tracking-[0.2em] text-primary uppercase">{eyebrow}</p>
         ) : null}
-        <h1 className="mt-4 max-w-3xl font-montserrat text-4xl font-black tracking-tight text-text md:text-5xl lg:text-6xl">
+        <h1 className="mt-4 max-w-3xl text-balance font-montserrat text-3xl font-black tracking-tight text-text sm:text-4xl md:text-5xl lg:text-6xl">
           {title}
         </h1>
         {description ? (

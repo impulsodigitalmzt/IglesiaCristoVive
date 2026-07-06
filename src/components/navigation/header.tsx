@@ -95,8 +95,8 @@ function Header() {
                 : "border-border/50 bg-white/65 shadow-md backdrop-blur-xl supports-[backdrop-filter]:bg-white/55",
             )}
           >
-          <div className="flex h-[var(--header-height)] items-center justify-between gap-4 px-3 sm:px-5">
-            <NavLogo transparent={isTransparent} />
+          <div className="flex h-[var(--header-height)] min-w-0 items-center justify-between gap-2 px-3 sm:gap-4 sm:px-5">
+            <NavLogo transparent={isTransparent} className="min-w-0" />
 
             <nav
               aria-label="Navegación principal"
@@ -198,13 +198,13 @@ function Header() {
               </Button>
             </nav>
 
-            <div className="flex items-center gap-1 lg:hidden">
-              <SocialLinks transparent={isTransparent} />
+            <div className="flex shrink-0 items-center gap-1.5 lg:hidden">
               <Button
                 asChild
                 variant="outline"
                 size="sm"
                 className={cn(
+                  "hidden min-[380px]:inline-flex",
                   isTransparent &&
                     "border-white/30 bg-white/10 text-white hover:bg-white/20 hover:text-white",
                 )}
@@ -214,7 +214,7 @@ function Header() {
               <Button
                 type="button"
                 variant="ghost"
-                size="icon-sm"
+                size="icon"
                 aria-expanded={mobileOpen}
                 aria-controls="mobile-navigation-drawer"
                 aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}

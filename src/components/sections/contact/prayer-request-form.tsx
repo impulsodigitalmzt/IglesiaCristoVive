@@ -95,7 +95,7 @@ function PrayerRequestForm() {
                 type="button"
                 onClick={() => setCategory(item.id)}
                 className={cn(
-                  "rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors",
+                  "rounded-full border px-4 py-2.5 text-sm font-semibold transition-colors",
                   category === item.id
                     ? "border-primary bg-primary text-primary-foreground"
                     : "border-white/20 bg-white/5 text-white/80 hover:border-primary/40 hover:text-white",

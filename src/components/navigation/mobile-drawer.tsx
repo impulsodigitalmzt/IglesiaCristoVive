@@ -71,7 +71,7 @@ function MobileDrawer({ open, onOpenChange, pathname }: MobileDrawerProps) {
             <DrawerClose asChild>
               <Button
                 variant="ghost"
-                size="icon-sm"
+                size="icon"
                 aria-label="Cerrar menú"
                 className="rounded-full border border-border/60 bg-background-alt"
               >
@@ -173,13 +173,13 @@ function MobileDrawer({ open, onOpenChange, pathname }: MobileDrawerProps) {
               </div>
             </div>
             <div className="mt-4 flex flex-wrap gap-2">
-              <Button asChild variant="outline" size="sm" className="h-9 flex-1 min-w-[120px]">
+              <Button asChild variant="outline" size="default" className="h-11 min-h-11 flex-1 min-w-[120px]">
                 <a href={`tel:${church.phone.replace(/\s/g, "")}`}>
                   <PhoneIcon className="size-3.5" />
                   Llamar
                 </a>
               </Button>
-              <Button asChild variant="outline" size="sm" className="h-9 flex-1 min-w-[120px]">
+              <Button asChild variant="outline" size="default" className="h-11 min-h-11 flex-1 min-w-[120px]">
                 <a
                   href={`https://wa.me/${church.whatsapp.replace(/\D/g, "")}`}
                   target="_blank"
@@ -288,7 +288,7 @@ function MobileNavGroup({ item, pathname, onNavigate }: MobileNavGroupProps) {
                       onClick={onNavigate}
                       aria-current={linkActive ? "page" : undefined}
                       className={cn(
-                        "block rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                        "block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
                         linkActive
                           ? "bg-primary/10 text-primary"
                           : "text-text/80 hover:bg-background-alt hover:text-text",

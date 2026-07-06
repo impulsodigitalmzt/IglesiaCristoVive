@@ -38,7 +38,7 @@ const defaultSecondaryCta: HeroCta = {
 };
 
 const titleLineClass =
-  "block font-montserrat text-[clamp(3rem,9vw,7rem)] font-bold leading-[0.95] tracking-tight";
+  "block font-montserrat text-[clamp(2.25rem,9vw,7rem)] font-bold leading-[0.95] tracking-tight";
 
 function HeroVideo({ src }: { src: string }) {
   return (
@@ -76,7 +76,7 @@ function HeroLogo() {
     <div
       data-hero-item
       aria-hidden
-      className="pointer-events-none absolute top-[28%] left-[52%] z-10 hidden w-40 opacity-90 md:block lg:top-[30%] lg:left-[54%] lg:w-52 xl:left-[56%] xl:w-60 2xl:w-72"
+      className="pointer-events-none absolute top-[28%] left-[52%] z-10 hidden w-40 opacity-90 lg:block lg:top-[30%] lg:left-[54%] lg:w-52 xl:left-[56%] xl:w-60 2xl:w-72"
     >
       <Image
         src={church.logoWhite}
@@ -215,7 +215,7 @@ function Hero({
               asChild
               variant="primary"
               size="lg"
-              className="min-w-[200px] shadow-lg shadow-black/20"
+              className="w-full min-w-0 shadow-lg shadow-black/20 sm:w-auto sm:min-w-[200px]"
             >
               <Link href={primaryCta.href}>{primaryCta.label}</Link>
             </Button>
@@ -223,19 +223,19 @@ function Hero({
               asChild
               variant="outline"
               size="lg"
-              className="min-w-[200px] border-white/40 bg-white/10 text-white backdrop-blur-sm hover:border-white hover:bg-white hover:text-text"
+              className="w-full min-w-0 border-white/40 bg-white/10 text-white backdrop-blur-sm hover:border-white hover:bg-white hover:text-text sm:w-auto sm:min-w-[200px]"
             >
               <Link href={secondaryCta.href}>{secondaryCta.label}</Link>
             </Button>
           </div>
 
-          <div data-hero-item className="mt-10 md:hidden">
+          <div data-hero-item className="mt-10 lg:hidden">
             <HeroSchedule />
           </div>
         </div>
       </MaxWidthContainer>
 
-      <div className="absolute right-4 bottom-28 z-10 hidden md:block md:right-10 md:bottom-32 lg:right-14 xl:right-20">
+      <div className="absolute right-4 bottom-28 z-10 hidden lg:block lg:right-14 lg:bottom-32 xl:right-20">
         <HeroSchedule />
       </div>
 

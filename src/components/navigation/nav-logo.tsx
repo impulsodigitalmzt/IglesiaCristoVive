@@ -21,7 +21,7 @@ function NavLogo({ transparent, className }: NavLogoProps) {
       className={cn("group relative inline-flex shrink-0 items-center focus-visible:outline-none", className)}
     >
       <m.span
-        className="relative block h-10 w-[148px] sm:h-11 sm:w-[168px]"
+        className="relative block h-9 w-[120px] overflow-hidden sm:h-11 sm:w-[168px]"
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.985 }}
         transition={transitions.fast}

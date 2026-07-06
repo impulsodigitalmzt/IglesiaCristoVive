@@ -79,7 +79,12 @@ function useCoverFlowSpacing() {
   const [spacing, setSpacing] = React.useState(280);
 
   React.useEffect(() => {
-    const update = () => setSpacing(window.innerWidth < 640 ? 200 : 280);
+    const update = () => {
+      const width = window.innerWidth;
+      if (width < 480) setSpacing(130);
+      else if (width < 640) setSpacing(170);
+      else setSpacing(280);
+    };
     update();
     window.addEventListener("resize", update);
     return () => window.removeEventListener("resize", update);
@@ -140,7 +145,7 @@ function CoverFlowCarousel<T extends { id: string }>({
 
   return (
     <div
-      className={cn("relative select-none", className)}
+      className={cn("relative overflow-x-hidden select-none", className)}
       role="region"
       aria-roledescription="carrusel"
       aria-label={ariaLabel}
@@ -280,7 +285,7 @@ function CoverFlowCarousel<T extends { id: string }>({
                 aria-label={label}
                 onClick={() => goTo(index)}
                 className={cn(
-                  "rounded-full px-3 py-1.5 font-inter text-xs font-medium transition-all duration-300 sm:text-sm",
+                  "min-h-11 rounded-full px-4 py-2 font-inter text-xs font-medium transition-all duration-300 sm:text-sm",
                   isActive
                     ? "bg-primary text-primary-foreground shadow-sm"
                     : isDark

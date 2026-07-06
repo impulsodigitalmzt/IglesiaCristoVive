@@ -27,9 +27,9 @@ function FloatingWhatsApp() {
       data-slot="floating-whatsapp"
       style={{ zIndex: Z_INDEX.fixed }}
       className={cn(
-        "fixed right-5 bottom-5 inline-flex size-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg shadow-black/20",
+        "fixed right-5 bottom-[max(1.25rem,env(safe-area-inset-bottom))] inline-flex size-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg shadow-black/20",
         "transition-transform duration-300 hover:scale-105 hover:bg-[#20bd5a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2",
-        "md:right-6 md:bottom-6 md:size-16",
+        "md:right-6 md:bottom-[max(1.5rem,env(safe-area-inset-bottom))] md:size-16",
       )}
     >
       <WhatsAppIcon className="size-7 md:size-8" />

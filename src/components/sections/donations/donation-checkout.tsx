@@ -180,7 +180,7 @@ function DonationCheckout() {
                 type="button"
                 onClick={() => setCategory(item.id)}
                 className={cn(
-                  "rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-colors",
+                  "min-h-11 rounded-full border px-4 py-2.5 text-sm font-semibold transition-colors",
                   category === item.id
                     ? "border-primary bg-primary text-primary-foreground"
                     : "border-border/60 bg-background-alt text-text hover:border-primary/30",
@@ -194,7 +194,7 @@ function DonationCheckout() {
 
         <div>
           <label className="text-sm font-semibold text-text">Monto en MXN</label>
-          <div className="mt-2 grid grid-cols-3 gap-2 sm:grid-cols-5">
+          <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-5">
             {donationTiers.map((tier) => (
               <button
                 key={tier.id}
@@ -204,7 +204,7 @@ function DonationCheckout() {
                   setCustomAmount("");
                 }}
                 className={cn(
-                  "rounded-xl border py-2.5 text-sm font-bold transition-all",
+                  "min-h-11 rounded-xl border py-2.5 text-sm font-bold transition-all",
                   !customAmount && amount === tier.amount
                     ? "border-primary bg-primary/10 text-primary shadow-sm"
                     : "border-border/60 bg-background-alt text-text hover:border-primary/30",

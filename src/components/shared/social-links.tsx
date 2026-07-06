@@ -42,7 +42,7 @@ function SocialLinks({
                 "size-10 border border-white/15 text-white/80 hover:border-white/40 hover:text-white",
               variant === "header" &&
                 cn(
-                  "size-9",
+                  "size-10",
                   transparent
                     ? "text-white/85 hover:bg-white/10 hover:text-white"
                     : "text-text/70 hover:bg-background-alt hover:text-text",

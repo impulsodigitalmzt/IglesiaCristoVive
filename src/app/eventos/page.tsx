@@ -64,7 +64,7 @@ export default function EventsPage() {
                 id={event.slug}
                 className="overflow-hidden rounded-[var(--radius-card-lg)] border border-border/60 bg-background-alt"
               >
-                <div className="grid md:grid-cols-[280px_1fr]">
+                <div className="grid lg:grid-cols-[minmax(200px,280px)_1fr]">
                   <div className="relative min-h-[220px] md:min-h-full">
                     <Image
                       src={event.image}

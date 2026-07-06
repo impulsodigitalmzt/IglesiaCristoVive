@@ -141,15 +141,15 @@ export default function ContactPage() {
                     asChild
                     variant="primary"
                     size="lg"
-                    className="pointer-events-auto shadow-lg"
+                    className="pointer-events-auto w-full max-w-sm whitespace-normal shadow-lg sm:w-auto"
                   >
                     <a
                       href={church.mapDirectionsUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <NavigationIcon className="size-5" aria-hidden />
-                      Cómo llegar en Google Maps
+                      <NavigationIcon className="size-5 shrink-0" aria-hidden />
+                      <span className="text-center">Cómo llegar en Google Maps</span>
                     </a>
                   </Button>
                 </div>

@@ -19,7 +19,7 @@ function HomeEvents() {
           {upcomingEvents.slice(0, 2).map((event) => (
             <Link key={event.id} href={`/eventos#${event.slug}`} className="block">
               <GlassCard tone="light" blur="lg" className="overflow-hidden border-border/70 bg-background/80">
-                <div className="grid md:grid-cols-[220px_1fr]">
+                <div className="grid lg:grid-cols-[minmax(180px,240px)_1fr]">
                   <div className="relative min-h-[180px] md:min-h-full">
                     <Image
                       src={event.image}

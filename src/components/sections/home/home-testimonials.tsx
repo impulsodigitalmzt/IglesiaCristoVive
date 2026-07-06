@@ -29,7 +29,7 @@ function GoogleRatingBadge() {
 
 function HomeTestimonials() {
   return (
-    <Section spacing="default" ariaLabel="Testimonios" className="bg-black text-white">
+    <Section spacing="default" ariaLabel="Testimonios" className="overflow-x-hidden bg-black text-white">
       <MaxWidthContainer>
         <div className="flex flex-col items-center gap-6 md:flex-row md:items-end md:justify-between">
           <div>
