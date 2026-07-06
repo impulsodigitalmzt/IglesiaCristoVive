@@ -18,7 +18,6 @@ type HeroCta = {
 
 type HeroProps = {
   videoSrc?: string;
-  eyebrow?: string;
   titleLine1?: string;
   titleLine2?: string;
   titleLine3?: string;
@@ -120,7 +119,6 @@ function HeroSchedule() {
 
 function Hero({
   videoSrc = church.heroVideo,
-  eyebrow = "Iglesia Cristo Vive · Mazatlán",
   titleLine1 = "CRISTO",
   titleLine2 = "VIVE",
   titleLine3,

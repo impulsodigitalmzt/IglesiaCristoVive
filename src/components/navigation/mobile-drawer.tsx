@@ -249,28 +249,33 @@ function MobileNavGroup({ item, pathname, onNavigate }: MobileNavGroupProps) {
             transition={transitions.fast}
             className="space-y-1 px-1"
           >
-            <Link
-              href={item.featured.href}
-              onClick={onNavigate}
-              className="mb-2 flex items-center gap-3 rounded-xl border border-border/50 bg-background-alt/80 p-2.5 transition-colors hover:border-primary/25"
-            >
-              <div className="relative size-12 shrink-0 overflow-hidden rounded-lg">
-                <Image
-                  src={item.featured.image}
-                  alt=""
-                  fill
-                  sizes="48px"
-                  className="object-cover"
-                />
-              </div>
-              <div className="min-w-0 flex-1">
-                <p className="truncate text-xs font-bold text-text">{item.featured.title}</p>
-                <p className="line-clamp-2 text-[11px] leading-snug text-muted-foreground">
-                  {item.featured.description}
-                </p>
-              </div>
-              <ArrowUpRightIcon className="size-3.5 shrink-0 text-primary" aria-hidden />
-            </Link>
+            {item.featured.href ? (
+              <Link
+                href={item.featured.href}
+                onClick={onNavigate}
+                {...(item.featured.href.startsWith("http")
+                  ? { target: "_blank", rel: "noopener noreferrer" }
+                  : {})}
+                className="mb-2 flex items-center gap-3 rounded-xl border border-border/50 bg-background-alt/80 p-2.5 transition-colors hover:border-primary/25"
+              >
+                <div className="relative size-12 shrink-0 overflow-hidden rounded-lg">
+                  <Image
+                    src={item.featured.image}
+                    alt=""
+                    fill
+                    sizes="48px"
+                    className="object-cover"
+                  />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-xs font-bold text-text">{item.featured.title}</p>
+                  <p className="line-clamp-2 text-[11px] leading-snug text-muted-foreground">
+                    {item.featured.description}
+                  </p>
+                </div>
+                <ArrowUpRightIcon className="size-3.5 shrink-0 text-primary" aria-hidden />
+              </Link>
+            ) : null}
 
             <ul className="space-y-0.5">
               {item.links.map((link) => {

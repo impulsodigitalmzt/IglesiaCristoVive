@@ -22,6 +22,7 @@ import { fireDonationConfetti } from "@/lib/confetti";
 import { cn } from "@/lib/utils";
 
 type PaymentMethod = "card" | "spei" | "oxxo";
+type DonationCategoryId = (typeof donationCategories)[number]["id"];
 
 const DEMO_CLABE = "012180001234567890";
 const DEMO_OXXO_REF = "9847 2156 3092";
@@ -49,7 +50,7 @@ function DonationCheckout() {
   const [step, setStep] = React.useState<"checkout" | "processing" | "success">("checkout");
   const [amount, setAmount] = React.useState(500);
   const [customAmount, setCustomAmount] = React.useState("");
-  const [category, setCategory] = React.useState(donationCategories[0].id);
+  const [category, setCategory] = React.useState<DonationCategoryId>(donationCategories[0].id);
   const [method, setMethod] = React.useState<PaymentMethod>("card");
   const [isMonthly, setIsMonthly] = React.useState(false);
   const [cardNumber, setCardNumber] = React.useState("");
