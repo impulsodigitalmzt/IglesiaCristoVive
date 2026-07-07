@@ -14,7 +14,8 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "optimize:hero-video": "node scripts/optimize-hero-video.mjs"
+    "optimize:hero-video": "node scripts/optimize-hero-video.mjs",
+    "generate:favicon": "node scripts/generate-favicon.mjs"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.15",
@@ -62,6 +63,7 @@
     "prettier": "^3.9.4",
     "prettier-plugin-tailwindcss": "^0.8.0",
     "tailwindcss": "^4.1.7",
+    "to-ico": "^1.1.5",
     "typescript": "^5"
   }
 }
