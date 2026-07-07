@@ -1,8 +1,7 @@
 const SUPABASE_VIDEOS_BASE =
   "https://ymzqxpmiuoqbcsovwgaq.supabase.co/storage/v1/object/public/Videos/Videos";
 
-export const HERO_VIDEO_URL =
-  "https://ymzqxpmiuoqbcsovwgaq.supabase.co/storage/v1/object/public/Videos/Videos/inicio.mp4";
+export const HERO_VIDEO_URL = `${SUPABASE_VIDEOS_BASE}/inicio.mp4`;
 
 export const BAPTISMS_VIDEO_URL =
   "https://ymzqxpmiuoqbcsovwgaq.supabase.co/storage/v1/object/public/Videos/Videos/bautismos.mp4";
