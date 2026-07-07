@@ -20,6 +20,7 @@ import {
   megaMenuNavigation,
 } from "@/data/navigation";
 import { useHeaderScroll } from "@/hooks/use-header-scroll";
+import { useEntranceAnimation } from "@/hooks/use-entrance-animation";
 import { Z_INDEX } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { headerEntranceVariants, transitions } from "@/lib/motion";
@@ -29,6 +30,7 @@ function Header() {
   const isHome = pathname === "/";
   const scrolled = useHeaderScroll({ threshold: 24 });
   const reducedMotion = useReducedMotion();
+  const entrance = useEntranceAnimation();
   const [activeMenu, setActiveMenu] = React.useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const headerRef = React.useRef<HTMLElement>(null);
@@ -89,8 +91,8 @@ function Header() {
       >
         <MaxWidthContainer>
           <m.div
-            initial={reducedMotion || !isHome ? false : "hidden"}
-            animate="visible"
+            initial={isHome ? entrance.initial : false}
+            animate={isHome ? entrance.animate : "visible"}
             variants={headerEntranceVariants}
             className={cn(
               "rounded-full border transition-[background-color,box-shadow,border-color,backdrop-filter] duration-500 ease-out",

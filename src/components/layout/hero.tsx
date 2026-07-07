@@ -4,11 +4,12 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { CalendarIcon, ChevronDownIcon, ClockIcon } from "lucide-react";
-import { m, useReducedMotion } from "framer-motion";
+import { m } from "framer-motion";
 
 import { MaxWidthContainer } from "@/components/layout/max-width-container";
 import { Button } from "@/components/ui/button";
 import { church } from "@/data/church";
+import { useEntranceAnimation } from "@/hooks/use-entrance-animation";
 import {
   heroEntranceContainer,
   heroEntranceItemVariants,
@@ -121,12 +122,18 @@ function HeroOverlay() {
   );
 }
 
-function HeroLogoDesktop({ animate }: { animate: boolean }) {
+function HeroLogoDesktop({
+  initial,
+  animate,
+}: {
+  initial: false | "hidden";
+  animate: "visible" | "hidden";
+}) {
   return (
     <m.div
       aria-hidden
-      initial={animate ? "hidden" : false}
-      animate="visible"
+      initial={initial}
+      animate={animate}
       variants={heroLogoEntranceVariants}
       className="pointer-events-none absolute top-[28%] left-[52%] z-10 hidden w-40 opacity-90 lg:block lg:top-[30%] lg:left-[54%] lg:w-52 xl:left-[56%] xl:w-60 2xl:w-72"
     >
@@ -199,8 +206,7 @@ function Hero({
   secondaryCta = defaultSecondaryCta,
   className,
 }: HeroProps) {
-  const reducedMotion = useReducedMotion();
-  const shouldAnimate = !reducedMotion;
+  const entrance = useEntranceAnimation();
 
   const renderTitleBlock = () => {
     if (titleLine3 && titleLine4) {
@@ -274,8 +280,8 @@ function Hero({
         <m.div
           className="w-full max-w-3xl text-left xl:max-w-4xl"
           variants={heroEntranceContainer}
-          initial={shouldAnimate ? "hidden" : false}
-          animate="visible"
+          initial={entrance.initial}
+          animate={entrance.animate}
         >
           {renderTitleBlock()}
 
@@ -317,23 +323,25 @@ function Hero({
       </MaxWidthContainer>
 
       <m.div
-        initial={shouldAnimate ? "hidden" : false}
-        animate="visible"
+        initial={entrance.initial}
+        animate={entrance.animate}
         variants={heroEntranceItemVariants}
-        transition={{ delay: 0.75 }}
+        transition={{ delay: 0.9 }}
         className="absolute right-4 bottom-28 z-10 hidden lg:block lg:right-14 lg:bottom-32 xl:right-20"
       >
         <HeroSchedule />
       </m.div>
 
-      <HeroLogoDesktop animate={shouldAnimate} />
+      <HeroLogoDesktop initial={entrance.initial} animate={entrance.animate} />
 
       <m.div
         className="pointer-events-none absolute inset-x-0 bottom-8 z-20 flex justify-center md:bottom-10"
-        animate={shouldAnimate ? { y: [0, 8, 0] } : undefined}
+        animate={
+          entrance.ready && entrance.shouldAnimate ? { y: [0, 8, 0] } : undefined
+        }
         transition={
-          shouldAnimate
-            ? { duration: 2, repeat: Infinity, ease: "easeInOut", delay: 1.2 }
+          entrance.ready && entrance.shouldAnimate
+            ? { duration: 2, repeat: Infinity, ease: "easeInOut", delay: 1.4 }
             : undefined
         }
       >

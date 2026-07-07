@@ -56,11 +56,11 @@ export const scaleInVariants = {
 
 /** Entrada del header en la página de inicio */
 export const headerEntranceVariants = {
-  hidden: { opacity: 0, y: -14 },
+  hidden: { opacity: 0, y: -22 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: easings.out },
+    transition: { duration: 0.6, ease: easings.out },
   },
 } as const;
 
@@ -69,29 +69,29 @@ export const heroEntranceContainer = {
   hidden: {},
   visible: {
     transition: {
-      delayChildren: 0.3,
-      staggerChildren: 0.11,
+      delayChildren: 0.45,
+      staggerChildren: 0.14,
     },
   },
 } as const;
 
 /** Título, párrafo y botones del hero */
 export const heroEntranceItemVariants = {
-  hidden: { opacity: 0, y: 26 },
+  hidden: { opacity: 0, y: 36 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.65, ease: easings.out },
+    transition: { duration: 0.75, ease: easings.out },
   },
 } as const;
 
 /** Isotipo / logotipo del hero */
 export const heroLogoEntranceVariants = {
-  hidden: { opacity: 0, y: 18, scale: 0.9 },
+  hidden: { opacity: 0, y: 24, scale: 0.86 },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { duration: 0.7, ease: easings.out, delay: 0.1 },
+    transition: { duration: 0.8, ease: easings.spring, delay: 0.12 },
   },
 } as const;
