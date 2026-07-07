@@ -101,9 +101,39 @@ export const introSplashContainer = {
   hidden: {},
   visible: {
     transition: {
-      delayChildren: 0.15,
-      staggerChildren: 0.13,
+      delayChildren: 0.08,
+      staggerChildren: 0.2,
     },
+  },
+} as const;
+
+export const introSplashLineStagger = {
+  hidden: {},
+  visible: (lineIndex: number) => ({
+    transition: {
+      delayChildren: 0.1 + lineIndex * 0.18,
+      staggerChildren: 0.042,
+    },
+  }),
+} as const;
+
+export const introSplashLetterVariants = {
+  hidden: {
+    opacity: 0,
+    y: 56,
+    x: -18,
+    rotateZ: -12,
+    scale: 0.82,
+    filter: "blur(10px)",
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    x: 0,
+    rotateZ: 0,
+    scale: 1,
+    filter: "blur(0px)",
+    transition: { duration: 0.62, ease: easings.spring },
   },
 } as const;
 
@@ -118,14 +148,39 @@ export const introSplashLineVariants = {
 } as const;
 
 export const introSplashLogoVariants = {
-  hidden: { opacity: 0, scale: 0.72, rotate: -6 },
+  hidden: {
+    opacity: 0,
+    scale: 0.45,
+    rotate: -18,
+    y: 72,
+    x: 48,
+    filter: "blur(14px)",
+  },
   visible: {
     opacity: 1,
     scale: 1,
     rotate: 0,
-    transition: { duration: 1, ease: easings.spring, delay: 0.35 },
+    y: 0,
+    x: 0,
+    filter: "blur(0px)",
+    transition: {
+      duration: 1.15,
+      ease: easings.spring,
+      delay: 0.55,
+    },
   },
 } as const;
+
+export const introSplashLogoFloat = {
+  y: [0, -10, 0] as [number, number, number],
+  rotate: [0, 1.5, 0] as [number, number, number],
+  transition: {
+    duration: 3.2,
+    repeat: Infinity,
+    ease: "easeInOut" as const,
+    delay: 1.4,
+  },
+};
 
 export const introSplashGlowVariants = {
   hidden: { opacity: 0, scale: 0.85 },
