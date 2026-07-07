@@ -19,7 +19,6 @@ type HeroCta = {
 type HeroProps = {
   videoSrc?: string;
   videoSrcLite?: string;
-  posterSrc?: string;
   titleLine1?: string;
   titleLine2?: string;
   titleLine3?: string;
@@ -41,7 +40,7 @@ const defaultSecondaryCta: HeroCta = {
 };
 
 const titleLineClass =
-  "block font-montserrat text-[clamp(2.25rem,9vw,7rem)] font-bold leading-[0.95] tracking-tight";
+  "block font-montserrat text-[clamp(2.25rem,9vw,7rem)] font-black uppercase leading-[0.95] tracking-[0.02em]";
 
 type NavigatorConnection = Navigator & {
   connection?: {
@@ -65,88 +64,40 @@ function shouldSkipHeroVideo() {
 }
 
 function pickHeroVideoSrc(fullSrc: string, liteSrc?: string) {
-  if (typeof window === "undefined") return null;
-
-  const isMobile = window.matchMedia("(max-width: 767px)").matches;
-  if (isMobile) return liteSrc ?? null;
-
   return liteSrc ?? fullSrc;
 }
 
-function HeroVideo({
-  src,
-  liteSrc,
-  poster,
-}: {
-  src: string;
-  liteSrc?: string;
-  poster: string;
-}) {
+function HeroVideo({ src, liteSrc }: { src: string; liteSrc?: string }) {
   const videoRef = React.useRef<HTMLVideoElement>(null);
-  const [videoSrc, setVideoSrc] = React.useState<string | null>(null);
-  const [videoReady, setVideoReady] = React.useState(false);
-
-  React.useEffect(() => {
-    if (shouldSkipHeroVideo()) return;
-
-    const chosenSrc = pickHeroVideoSrc(src, liteSrc);
-    if (!chosenSrc) return;
-
-    const startLoading = () => setVideoSrc(chosenSrc);
-
-    if (typeof window.requestIdleCallback === "function") {
-      const id = window.requestIdleCallback(startLoading, { timeout: 2500 });
-      return () => window.cancelIdleCallback(id);
-    }
-
-    const timer = globalThis.setTimeout(startLoading, 800);
-    return () => globalThis.clearTimeout(timer);
-  }, [src, liteSrc]);
+  const [videoSrc] = React.useState<string | null>(() => {
+    if (typeof window === "undefined") return null;
+    if (shouldSkipHeroVideo()) return null;
+    return pickHeroVideoSrc(src, liteSrc);
+  });
 
   React.useEffect(() => {
     const video = videoRef.current;
     if (!video || !videoSrc) return;
 
-    const handleCanPlay = () => setVideoReady(true);
-
-    video.addEventListener("canplay", handleCanPlay);
-    video.load();
     void video.play().catch(() => {});
-
-    return () => video.removeEventListener("canplay", handleCanPlay);
   }, [videoSrc]);
 
+  if (!videoSrc) {
+    return <div aria-hidden className="absolute inset-0 bg-neutral-950" />;
+  }
+
   return (
-    <>
-      <Image
-        src={poster}
-        alt=""
-        fill
-        priority
-        sizes="100vw"
-        className={cn(
-          "object-cover transition-opacity duration-700",
-          videoReady ? "opacity-0" : "opacity-100",
-        )}
-      />
-      {videoSrc ? (
-        <video
-          ref={videoRef}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="none"
-          aria-hidden
-          className={cn(
-            "absolute inset-0 size-full object-cover transition-opacity duration-700",
-            videoReady ? "opacity-100" : "opacity-0",
-          )}
-        >
-          <source src={videoSrc} type="video/mp4" />
-        </video>
-      ) : null}
-    </>
+    <video
+      ref={videoRef}
+      src={videoSrc}
+      autoPlay
+      loop
+      muted
+      playsInline
+      preload="auto"
+      aria-hidden
+      className="absolute inset-0 size-full object-cover"
+    />
   );
 }
 
@@ -232,7 +183,6 @@ function HeroSchedule() {
 function Hero({
   videoSrc = church.heroVideo,
   videoSrcLite = church.heroVideoLite,
-  posterSrc = church.heroPoster,
   titleLine1 = "CRISTO",
   titleLine2 = "VIVE",
   titleLine3,
@@ -292,7 +242,7 @@ function Hero({
       )}
     >
       <div data-slot="hero-media" className="absolute inset-0 -z-20 size-full" aria-hidden>
-        <HeroVideo src={videoSrc} liteSrc={videoSrcLite} poster={posterSrc} />
+        <HeroVideo src={videoSrc} liteSrc={videoSrcLite} />
       </div>
 
       <div data-slot="hero-overlay" className="absolute inset-0" aria-hidden>

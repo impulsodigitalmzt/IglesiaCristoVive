@@ -36,9 +36,9 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  --font-family-heading: var(--font-display), Georgia, "Times New Roman", serif;
+  --font-family-heading: var(--font-display), "Montserrat", system-ui, sans-serif;
   --font-family-inter: var(--font-inter), system-ui, sans-serif;
-  --font-family-montserrat: var(--font-display), Georgia, "Times New Roman", serif;
+  --font-family-montserrat: var(--font-display), "Montserrat", system-ui, sans-serif;
   --font-family-sans: var(--font-inter), system-ui, sans-serif;
 
   /* Radius */
@@ -101,7 +101,7 @@
   h4,
   h5,
   h6 {
-    font-family: var(--font-display), Georgia, "Times New Roman", serif;
+    font-family: var(--font-display), "Montserrat", system-ui, sans-serif;
     @apply font-bold tracking-tight text-text;
   }
 
@@ -124,7 +124,7 @@
 
 @layer utilities {
   .font-montserrat {
-    font-family: var(--font-display), Georgia, "Times New Roman", serif;
+    font-family: var(--font-display), "Montserrat", system-ui, sans-serif;
   }
 
   .font-heading {
