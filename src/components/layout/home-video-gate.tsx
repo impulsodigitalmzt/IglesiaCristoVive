@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import Image from "next/image";
 
 import { Z_INDEX } from "@/lib/constants";
 import {
@@ -14,19 +13,11 @@ type HomeVideoGateProps = {
   children: React.ReactNode;
   videoSrc: string;
   videoSrcLite?: string;
-  poster: string;
 };
 
-function HomeVideoGate({
-  children,
-  videoSrc,
-  videoSrcLite,
-  poster,
-}: HomeVideoGateProps) {
-  const [bootReady, setBootReady] = React.useState(() => {
-    if (typeof window === "undefined") return false;
-    return shouldSkipHeroVideo();
-  });
+function HomeVideoGate({ children, videoSrc, videoSrcLite }: HomeVideoGateProps) {
+  const videoRef = React.useRef<HTMLVideoElement>(null);
+  const [bootReady, setBootReady] = React.useState(false);
 
   React.useEffect(() => {
     if (shouldSkipHeroVideo()) {
@@ -34,11 +25,10 @@ function HomeVideoGate({
       return;
     }
 
+    const video = videoRef.current;
+    if (!video) return;
+
     const resolvedSrc = pickHeroVideoSrc(videoSrc, videoSrcLite);
-    const video = document.createElement("video");
-    video.preload = "auto";
-    video.muted = true;
-    video.playsInline = true;
     video.src = resolvedSrc;
 
     let finished = false;
@@ -87,14 +77,14 @@ function HomeVideoGate({
         aria-busy="true"
         aria-label="Cargando video de bienvenida"
       >
-        <Image
-          src={poster}
-          alt=""
-          fill
-          priority
-          fetchPriority="high"
-          sizes="100vw"
-          className="object-cover"
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          playsInline
+          preload="auto"
+          aria-hidden
+          className="size-full object-cover"
         />
       </div>
     );

@@ -29,14 +29,9 @@ export const metadata: Metadata = createPageMetadata({
 export default function HomePage() {
   return (
     <>
-      <link rel="preload" as="image" href={church.heroPoster} fetchPriority="high" />
       <link rel="preload" as="video" href={HERO_VIDEO_URL} type="video/mp4" />
 
-      <HomeVideoGate
-        videoSrc={church.heroVideo}
-        videoSrcLite={church.heroVideoLite}
-        poster={church.heroPoster}
-      >
+      <HomeVideoGate videoSrc={church.heroVideo} videoSrcLite={church.heroVideoLite}>
         <Hero {...homeHero} />
         <HomeWelcome />
         <HomeYouTube />
