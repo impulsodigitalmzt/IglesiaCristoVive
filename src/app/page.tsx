@@ -31,16 +31,7 @@ export default function HomePage() {
     <>
       <link rel="preload" as="video" href={HERO_VIDEO_URL} type="video/mp4" />
 
-      <HomeVideoGate
-        videoSrc={church.heroVideo}
-        videoSrcLite={church.heroVideoLite}
-        intro={{
-          titleLine1: homeHero.titleLine1,
-          titleLine2: homeHero.titleLine2,
-          titleLine3: homeHero.titleLine3,
-          titleLine4: homeHero.titleLine4,
-        }}
-      >
+      <HomeVideoGate videoSrc={church.heroVideo} videoSrcLite={church.heroVideoLite}>
         <Hero {...homeHero} />
         <HomeWelcome />
         <HomeYouTube />
