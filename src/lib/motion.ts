@@ -53,3 +53,45 @@ export const scaleInVariants = {
   hidden: { opacity: 0, scale: 0.96 },
   visible: { opacity: 1, scale: 1, transition: transitions.normal },
 } as const;
+
+/** Entrada del header en la página de inicio */
+export const headerEntranceVariants = {
+  hidden: { opacity: 0, y: -14 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: easings.out },
+  },
+} as const;
+
+/** Contenedor escalonado del hero (después del header) */
+export const heroEntranceContainer = {
+  hidden: {},
+  visible: {
+    transition: {
+      delayChildren: 0.3,
+      staggerChildren: 0.11,
+    },
+  },
+} as const;
+
+/** Título, párrafo y botones del hero */
+export const heroEntranceItemVariants = {
+  hidden: { opacity: 0, y: 26 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.65, ease: easings.out },
+  },
+} as const;
+
+/** Isotipo / logotipo del hero */
+export const heroLogoEntranceVariants = {
+  hidden: { opacity: 0, y: 18, scale: 0.9 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.7, ease: easings.out, delay: 0.1 },
+  },
+} as const;

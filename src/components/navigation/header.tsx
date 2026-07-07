@@ -22,10 +22,11 @@ import {
 import { useHeaderScroll } from "@/hooks/use-header-scroll";
 import { Z_INDEX } from "@/lib/constants";
 import { cn } from "@/lib/utils";
-import { transitions } from "@/lib/motion";
+import { headerEntranceVariants, transitions } from "@/lib/motion";
 
 function Header() {
   const pathname = usePathname();
+  const isHome = pathname === "/";
   const scrolled = useHeaderScroll({ threshold: 24 });
   const reducedMotion = useReducedMotion();
   const [activeMenu, setActiveMenu] = React.useState<string | null>(null);
@@ -87,7 +88,10 @@ function Header() {
         onMouseLeave={scheduleClose}
       >
         <MaxWidthContainer>
-          <div
+          <m.div
+            initial={reducedMotion || !isHome ? false : "hidden"}
+            animate="visible"
+            variants={headerEntranceVariants}
             className={cn(
               "rounded-full border transition-[background-color,box-shadow,border-color,backdrop-filter] duration-500 ease-out",
               isTransparent
@@ -233,7 +237,7 @@ function Header() {
               </Button>
             </div>
           </div>
-          </div>
+          </m.div>
         </MaxWidthContainer>
 
         <AnimatePresence mode="wait">

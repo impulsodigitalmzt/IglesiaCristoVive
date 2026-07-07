@@ -4,11 +4,16 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { CalendarIcon, ChevronDownIcon, ClockIcon } from "lucide-react";
+import { m, useReducedMotion } from "framer-motion";
 
 import { MaxWidthContainer } from "@/components/layout/max-width-container";
 import { Button } from "@/components/ui/button";
 import { church } from "@/data/church";
-import { gsap, gsapEase, registerGsapPlugins } from "@/lib/gsap";
+import {
+  heroEntranceContainer,
+  heroEntranceItemVariants,
+  heroLogoEntranceVariants,
+} from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 type HeroCta = {
@@ -116,11 +121,13 @@ function HeroOverlay() {
   );
 }
 
-function HeroLogoDesktop() {
+function HeroLogoDesktop({ animate }: { animate: boolean }) {
   return (
-    <div
-      data-hero-item
+    <m.div
       aria-hidden
+      initial={animate ? "hidden" : false}
+      animate="visible"
+      variants={heroLogoEntranceVariants}
       className="pointer-events-none absolute top-[28%] left-[52%] z-10 hidden w-40 opacity-90 lg:block lg:top-[30%] lg:left-[54%] lg:w-52 xl:left-[56%] xl:w-60 2xl:w-72"
     >
       <Image
@@ -131,14 +138,15 @@ function HeroLogoDesktop() {
         priority
         className="h-auto w-full object-contain drop-shadow-[0_8px_24px_rgba(0,0,0,0.45)]"
       />
-    </div>
+    </m.div>
   );
 }
 
 function HeroLogoMobile() {
   return (
-    <div
+    <m.div
       aria-hidden
+      variants={heroLogoEntranceVariants}
       className="relative mt-1 aspect-[5/4] w-[6.75rem] shrink-0 sm:mt-0.5 sm:w-28 lg:hidden"
     >
       <Image
@@ -149,14 +157,13 @@ function HeroLogoMobile() {
         sizes="112px"
         className="object-contain object-top drop-shadow-[0_6px_18px_rgba(0,0,0,0.45)]"
       />
-    </div>
+    </m.div>
   );
 }
 
 function HeroSchedule() {
   return (
     <div
-      data-hero-item
       className="w-full max-w-[min(100%,20rem)] rounded-2xl border border-primary/50 bg-black/45 px-5 py-4 backdrop-blur-md sm:max-w-xs md:max-w-sm md:px-6 md:py-5"
     >
       <p className="mb-3 text-[11px] font-semibold tracking-[0.22em] text-primary uppercase">
@@ -192,48 +199,62 @@ function Hero({
   secondaryCta = defaultSecondaryCta,
   className,
 }: HeroProps) {
-  const sectionRef = React.useRef<HTMLElement>(null);
-  const scrollRef = React.useRef<HTMLDivElement>(null);
+  const reducedMotion = useReducedMotion();
+  const shouldAnimate = !reducedMotion;
 
-  React.useEffect(() => {
-    registerGsapPlugins();
-    const section = sectionRef.current;
-    if (!section) return;
+  const renderTitleBlock = () => {
+    if (titleLine3 && titleLine4) {
+      return (
+        <m.div variants={heroEntranceItemVariants}>
+          <h1 className="font-montserrat font-black tracking-tight">
+            <div className="flex items-start gap-2 sm:gap-3 lg:block">
+              <div className="min-w-0 flex-1">
+                <span className={cn(titleLineClass, "text-white")}>{titleLine1}</span>
+                <span className={cn(titleLineClass, "text-white")}>{titleLine2}</span>
+              </div>
+              <HeroLogoMobile />
+            </div>
+            <span className={cn(titleLineClass, "text-primary")}>{titleLine3}</span>
+            <span className={cn(titleLineClass, "text-primary")}>{titleLine4}</span>
+          </h1>
+        </m.div>
+      );
+    }
 
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
+    if (titleLine3) {
+      return (
+        <m.div variants={heroEntranceItemVariants}>
+          <h1 className="font-montserrat font-black tracking-tight">
+            <div className="flex items-start gap-2 sm:gap-3 lg:block">
+              <div className="min-w-0 flex-1">
+                <span className={cn(titleLineClass, "text-white")}>{titleLine1}</span>
+                <span className={cn(titleLineClass, "text-white")}>{titleLine2}</span>
+              </div>
+              <HeroLogoMobile />
+            </div>
+            <span className={cn(titleLineClass, "text-primary")}>{titleLine3}</span>
+          </h1>
+        </m.div>
+      );
+    }
 
-    if (prefersReducedMotion) return;
-
-    const ctx = gsap.context(() => {
-      gsap.from("[data-hero-item]", {
-        y: 40,
-        opacity: 0,
-        duration: 0.9,
-        stagger: 0.1,
-        delay: 0.1,
-        ease: gsapEase.cinematic,
-      });
-
-      if (scrollRef.current) {
-        gsap.to(scrollRef.current, {
-          y: 8,
-          repeat: -1,
-          yoyo: true,
-          duration: 2,
-          ease: "sine.inOut",
-          delay: 1,
-        });
-      }
-    }, section);
-
-    return () => ctx.revert();
-  }, []);
+    return (
+      <m.div variants={heroEntranceItemVariants}>
+        <h1 className="font-montserrat font-black tracking-tight">
+          <div className="flex items-start gap-2 sm:gap-3 lg:block">
+            <div className="min-w-0 flex-1">
+              <span className={cn(titleLineClass, "text-white")}>{titleLine1}</span>
+              <span className={cn(titleLineClass, "text-primary")}>{titleLine2}</span>
+            </div>
+            <HeroLogoMobile />
+          </div>
+        </h1>
+      </m.div>
+    );
+  };
 
   return (
     <section
-      ref={sectionRef}
       data-slot="hero"
       aria-label="Presentación principal"
       className={cn(
@@ -250,55 +271,25 @@ function Hero({
       </div>
 
       <MaxWidthContainer className="relative z-10 flex min-h-svh flex-col justify-center pb-36 pt-[calc(var(--header-height)+2.5rem)] md:pb-40 md:pt-[calc(var(--header-height)+3.5rem)] lg:max-w-[calc(100%-22rem)]">
-        <div className="w-full max-w-3xl text-left xl:max-w-4xl">
-          <h1 data-hero-item className="font-montserrat font-black tracking-tight">
-            {titleLine3 ? (
-              titleLine4 ? (
-                <>
-                  <div className="flex items-start gap-2 sm:gap-3 lg:block">
-                    <div className="min-w-0 flex-1">
-                      <span className={cn(titleLineClass, "text-white")}>{titleLine1}</span>
-                      <span className={cn(titleLineClass, "text-white")}>{titleLine2}</span>
-                    </div>
-                    <HeroLogoMobile />
-                  </div>
-                  <span className={cn(titleLineClass, "text-primary")}>{titleLine3}</span>
-                  <span className={cn(titleLineClass, "text-primary")}>{titleLine4}</span>
-                </>
-              ) : (
-                <>
-                  <div className="flex items-start gap-2 sm:gap-3 lg:block">
-                    <div className="min-w-0 flex-1">
-                      <span className={cn(titleLineClass, "text-white")}>{titleLine1}</span>
-                      <span className={cn(titleLineClass, "text-white")}>{titleLine2}</span>
-                    </div>
-                    <HeroLogoMobile />
-                  </div>
-                  <span className={cn(titleLineClass, "text-primary")}>{titleLine3}</span>
-                </>
-              )
-            ) : (
-              <div className="flex items-start gap-2 sm:gap-3 lg:block">
-                <div className="min-w-0 flex-1">
-                  <span className={cn(titleLineClass, "text-white")}>{titleLine1}</span>
-                  <span className={cn(titleLineClass, "text-primary")}>{titleLine2}</span>
-                </div>
-                <HeroLogoMobile />
-              </div>
-            )}
-          </h1>
+        <m.div
+          className="w-full max-w-3xl text-left xl:max-w-4xl"
+          variants={heroEntranceContainer}
+          initial={shouldAnimate ? "hidden" : false}
+          animate="visible"
+        >
+          {renderTitleBlock()}
 
           {subtitle ? (
-            <p
-              data-hero-item
+            <m.p
+              variants={heroEntranceItemVariants}
               className="mt-8 max-w-xl text-lg leading-relaxed text-white/85 md:mt-10 md:text-xl md:leading-relaxed"
             >
               {subtitle}
-            </p>
+            </m.p>
           ) : null}
 
-          <div
-            data-hero-item
+          <m.div
+            variants={heroEntranceItemVariants}
             className="mt-10 flex flex-row items-stretch gap-2 sm:mt-12 sm:flex-wrap sm:items-center sm:gap-4"
           >
             <Button
@@ -317,23 +308,34 @@ function Hero({
             >
               <Link href={secondaryCta.href}>{secondaryCta.label}</Link>
             </Button>
-          </div>
+          </m.div>
 
-          <div data-hero-item className="mt-10 lg:hidden">
+          <m.div variants={heroEntranceItemVariants} className="mt-10 lg:hidden">
             <HeroSchedule />
-          </div>
-        </div>
+          </m.div>
+        </m.div>
       </MaxWidthContainer>
 
-      <div className="absolute right-4 bottom-28 z-10 hidden lg:block lg:right-14 lg:bottom-32 xl:right-20">
+      <m.div
+        initial={shouldAnimate ? "hidden" : false}
+        animate="visible"
+        variants={heroEntranceItemVariants}
+        transition={{ delay: 0.75 }}
+        className="absolute right-4 bottom-28 z-10 hidden lg:block lg:right-14 lg:bottom-32 xl:right-20"
+      >
         <HeroSchedule />
-      </div>
+      </m.div>
 
-      <HeroLogoDesktop />
+      <HeroLogoDesktop animate={shouldAnimate} />
 
-      <div
-        ref={scrollRef}
+      <m.div
         className="pointer-events-none absolute inset-x-0 bottom-8 z-20 flex justify-center md:bottom-10"
+        animate={shouldAnimate ? { y: [0, 8, 0] } : undefined}
+        transition={
+          shouldAnimate
+            ? { duration: 2, repeat: Infinity, ease: "easeInOut", delay: 1.2 }
+            : undefined
+        }
       >
         <div className="flex flex-col items-center gap-2 text-white/70" aria-hidden>
           <span className="text-[11px] font-medium tracking-[0.24em] uppercase">
@@ -341,7 +343,7 @@ function Hero({
           </span>
           <ChevronDownIcon className="size-6" />
         </div>
-      </div>
+      </m.div>
     </section>
   );
 }
