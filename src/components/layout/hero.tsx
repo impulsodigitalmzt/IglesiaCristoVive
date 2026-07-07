@@ -11,6 +11,10 @@ import { Button } from "@/components/ui/button";
 import { church } from "@/data/church";
 import { useEntranceAnimation } from "@/hooks/use-entrance-animation";
 import {
+  pickHeroVideoSrc,
+  shouldSkipHeroVideo,
+} from "@/lib/hero-video";
+import {
   heroEntranceContainer,
   heroEntranceItemVariants,
   heroLogoEntranceVariants,
@@ -47,31 +51,6 @@ const defaultSecondaryCta: HeroCta = {
 
 const titleLineClass =
   "block font-montserrat text-[clamp(2.25rem,9vw,7rem)] font-black uppercase leading-[0.95] tracking-[0.02em]";
-
-type NavigatorConnection = Navigator & {
-  connection?: {
-    saveData?: boolean;
-    effectiveType?: string;
-  };
-};
-
-function shouldSkipHeroVideo() {
-  if (typeof window === "undefined") return true;
-
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return true;
-
-  const connection = (navigator as NavigatorConnection).connection;
-  if (connection?.saveData) return true;
-  if (connection?.effectiveType === "slow-2g" || connection?.effectiveType === "2g") {
-    return true;
-  }
-
-  return false;
-}
-
-function pickHeroVideoSrc(fullSrc: string, liteSrc?: string) {
-  return liteSrc ?? fullSrc;
-}
 
 function HeroVideo({
   src,
