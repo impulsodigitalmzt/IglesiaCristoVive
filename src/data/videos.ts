@@ -1,7 +1,10 @@
 const SUPABASE_VIDEOS_BASE =
   "https://ymzqxpmiuoqbcsovwgaq.supabase.co/storage/v1/object/public/Videos/Videos";
 
-export const HERO_VIDEO_URL = `${SUPABASE_VIDEOS_BASE}/inicio.mp4`;
+/** Subir al reemplazar inicio.mp4 en Supabase (evita que el navegador sirva la versión en caché). */
+const HERO_VIDEO_VERSION = "2";
+
+export const HERO_VIDEO_URL = `${SUPABASE_VIDEOS_BASE}/inicio.mp4?v=${HERO_VIDEO_VERSION}`;
 
 export const BAPTISMS_VIDEO_URL =
   "https://ymzqxpmiuoqbcsovwgaq.supabase.co/storage/v1/object/public/Videos/Videos/bautismos.mp4";
