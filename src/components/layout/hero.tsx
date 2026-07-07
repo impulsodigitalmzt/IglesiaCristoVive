@@ -73,37 +73,73 @@ function pickHeroVideoSrc(fullSrc: string, liteSrc?: string) {
   return liteSrc ?? fullSrc;
 }
 
-function HeroVideo({ src, liteSrc }: { src: string; liteSrc?: string }) {
+function HeroVideo({
+  src,
+  liteSrc,
+  poster,
+}: {
+  src: string;
+  liteSrc?: string;
+  poster: string;
+}) {
   const videoRef = React.useRef<HTMLVideoElement>(null);
   const [videoSrc] = React.useState<string | null>(() => {
     if (typeof window === "undefined") return null;
     if (shouldSkipHeroVideo()) return null;
     return pickHeroVideoSrc(src, liteSrc);
   });
+  const [videoReady, setVideoReady] = React.useState(false);
 
   React.useEffect(() => {
     const video = videoRef.current;
     if (!video || !videoSrc) return;
 
+    const markReady = () => setVideoReady(true);
+
+    video.addEventListener("playing", markReady);
+    video.addEventListener("canplay", markReady);
+
     void video.play().catch(() => {});
+
+    return () => {
+      video.removeEventListener("playing", markReady);
+      video.removeEventListener("canplay", markReady);
+    };
   }, [videoSrc]);
 
-  if (!videoSrc) {
-    return <div aria-hidden className="absolute inset-0 bg-neutral-950" />;
-  }
+  const showPoster = !videoSrc || !videoReady;
 
   return (
-    <video
-      ref={videoRef}
-      src={videoSrc}
-      autoPlay
-      loop
-      muted
-      playsInline
-      preload="auto"
-      aria-hidden
-      className="absolute inset-0 size-full object-cover"
-    />
+    <div className="absolute inset-0 size-full">
+      <Image
+        src={poster}
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        aria-hidden
+        className={cn(
+          "object-cover transition-opacity duration-700 ease-out",
+          showPoster ? "opacity-100" : "opacity-0",
+        )}
+      />
+      {videoSrc ? (
+        <video
+          ref={videoRef}
+          src={videoSrc}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          aria-hidden
+          className={cn(
+            "absolute inset-0 size-full object-cover transition-opacity duration-700 ease-out",
+            videoReady ? "opacity-100" : "opacity-0",
+          )}
+        />
+      ) : null}
+    </div>
   );
 }
 
@@ -269,7 +305,7 @@ function Hero({
       )}
     >
       <div data-slot="hero-media" className="absolute inset-0 -z-20 size-full" aria-hidden>
-        <HeroVideo src={videoSrc} liteSrc={videoSrcLite} />
+        <HeroVideo src={videoSrc} liteSrc={videoSrcLite} poster={church.heroPoster} />
       </div>
 
       <div data-slot="hero-overlay" className="absolute inset-0" aria-hidden>

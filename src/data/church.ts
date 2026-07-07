@@ -27,7 +27,7 @@ export const church = {
   },
   heroVideo: HERO_VIDEO_URL,
   heroVideoLite: HERO_VIDEO_URL,
-  heroPoster: imageAssets.hero,
+  heroPoster: imageAssets.heroVideoPoster,
   logoWhite: imageAssets.logoWhite,
   logoGray: imageAssets.logoGray,
 } as const;
