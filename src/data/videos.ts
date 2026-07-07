@@ -8,7 +8,7 @@ export const BAPTISMS_VIDEO_URL =
   "https://ymzqxpmiuoqbcsovwgaq.supabase.co/storage/v1/object/public/Videos/Videos/bautismos.mp4";
 
 export const KIDS_MINISTRY_VIDEO_URL =
-  "https://ymzqxpmiuoqbcsovwgaq.supabase.co/storage/v1/object/public/Videos/Videos/ni%C3%B1os.mp4";
+  "https://ymzqxpmiuoqbcsovwgaq.supabase.co/storage/v1/object/public/Videos/Videos/ninos.mp4";
 
 export const videoAssets = {
   hero: HERO_VIDEO_URL,
