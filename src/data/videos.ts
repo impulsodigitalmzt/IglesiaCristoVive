@@ -2,7 +2,7 @@ const SUPABASE_VIDEOS_BASE =
   "https://ymzqxpmiuoqbcsovwgaq.supabase.co/storage/v1/object/public/Videos/Videos";
 
 export const HERO_VIDEO_URL =
-  "https://ymzqxpmiuoqbcsovwgaq.supabase.co/storage/v1/object/public/Videos/Videos/inicio1.mp4";
+  "https://ymzqxpmiuoqbcsovwgaq.supabase.co/storage/v1/object/public/Videos/Videos/inicio.mp4";
 
 export const BAPTISMS_VIDEO_URL =
   "https://ymzqxpmiuoqbcsovwgaq.supabase.co/storage/v1/object/public/Videos/Videos/bautismos.mp4";
@@ -26,7 +26,7 @@ export const videoAssets = {
   youthMinistry: `${SUPABASE_VIDEOS_BASE}/jovenes.mp4`,
 } as const;
 
-/** Misma URL que el hero hasta que subas inicio1-lite.mp4 a Supabase. */
+/** Misma URL que el hero (versión optimizada para carga). */
 export const heroVideoLite = HERO_VIDEO_URL;
 
 export type VideoAssetKey = keyof typeof videoAssets;
