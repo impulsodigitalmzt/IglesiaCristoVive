@@ -299,13 +299,13 @@ function Hero({
 
           <div
             data-hero-item
-            className="mt-10 flex flex-col gap-4 sm:mt-12 sm:flex-row sm:flex-wrap sm:items-center"
+            className="mt-10 flex flex-row items-stretch gap-2 sm:mt-12 sm:flex-wrap sm:items-center sm:gap-4"
           >
             <Button
               asChild
               variant="primary"
               size="lg"
-              className="w-full min-w-0 shadow-lg shadow-black/20 sm:w-auto sm:min-w-[200px]"
+              className="h-11 min-w-0 flex-1 px-3 text-xs leading-tight whitespace-normal shadow-lg shadow-black/20 sm:h-12 sm:flex-none sm:px-8 sm:text-base sm:whitespace-nowrap sm:min-w-[200px]"
             >
               <Link href={primaryCta.href}>{primaryCta.label}</Link>
             </Button>
@@ -313,7 +313,7 @@ function Hero({
               asChild
               variant="outline"
               size="lg"
-              className="w-full min-w-0 border-white/40 bg-white/10 text-white backdrop-blur-sm hover:border-white hover:bg-white hover:text-text sm:w-auto sm:min-w-[200px]"
+              className="h-11 min-w-0 flex-1 border-white/40 bg-white/10 px-3 text-xs leading-tight whitespace-normal text-white backdrop-blur-sm hover:border-white hover:bg-white hover:text-text sm:h-12 sm:flex-none sm:px-8 sm:text-base sm:whitespace-nowrap sm:min-w-[200px]"
             >
               <Link href={secondaryCta.href}>{secondaryCta.label}</Link>
             </Button>
