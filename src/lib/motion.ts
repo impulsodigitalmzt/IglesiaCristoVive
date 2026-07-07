@@ -95,3 +95,50 @@ export const heroLogoEntranceVariants = {
     transition: { duration: 0.8, ease: easings.spring, delay: 0.12 },
   },
 } as const;
+
+/** Intro espectacular mientras carga el video del inicio */
+export const introSplashContainer = {
+  hidden: {},
+  visible: {
+    transition: {
+      delayChildren: 0.15,
+      staggerChildren: 0.13,
+    },
+  },
+} as const;
+
+export const introSplashLineVariants = {
+  hidden: { opacity: 0, y: 48, filter: "blur(12px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.85, ease: easings.out },
+  },
+} as const;
+
+export const introSplashLogoVariants = {
+  hidden: { opacity: 0, scale: 0.72, rotate: -6 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    rotate: 0,
+    transition: { duration: 1, ease: easings.spring, delay: 0.35 },
+  },
+} as const;
+
+export const introSplashGlowVariants = {
+  hidden: { opacity: 0, scale: 0.85 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 1.2, ease: easings.out },
+  },
+} as const;
+
+export const introSplashExit = {
+  opacity: 0,
+  scale: 1.04,
+  filter: "blur(10px)",
+  transition: { duration: 0.75, ease: easings.in },
+} as const;

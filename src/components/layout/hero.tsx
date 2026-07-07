@@ -10,6 +10,7 @@ import { MaxWidthContainer } from "@/components/layout/max-width-container";
 import { Button } from "@/components/ui/button";
 import { church } from "@/data/church";
 import { useEntranceAnimation } from "@/hooks/use-entrance-animation";
+import { useHomeBootComplete } from "@/components/layout/home-video-gate";
 import {
   pickHeroVideoSrc,
   shouldSkipHeroVideo,
@@ -185,7 +186,11 @@ function Hero({
   secondaryCta = defaultSecondaryCta,
   className,
 }: HeroProps) {
+  const bootComplete = useHomeBootComplete();
   const entrance = useEntranceAnimation();
+  const motionState = bootComplete
+    ? { initial: false as const, animate: "visible" as const, ready: true, shouldAnimate: false }
+    : entrance;
 
   const renderTitleBlock = () => {
     if (titleLine3 && titleLine4) {
@@ -259,8 +264,8 @@ function Hero({
         <m.div
           className="w-full max-w-3xl text-left xl:max-w-4xl"
           variants={heroEntranceContainer}
-          initial={entrance.initial}
-          animate={entrance.animate}
+          initial={motionState.initial}
+          animate={motionState.animate}
         >
           {renderTitleBlock()}
 
@@ -302,8 +307,8 @@ function Hero({
       </MaxWidthContainer>
 
       <m.div
-        initial={entrance.initial}
-        animate={entrance.animate}
+        initial={motionState.initial}
+        animate={motionState.animate}
         variants={heroEntranceItemVariants}
         transition={{ delay: 0.9 }}
         className="absolute right-4 bottom-28 z-10 hidden lg:block lg:right-14 lg:bottom-32 xl:right-20"
@@ -311,15 +316,15 @@ function Hero({
         <HeroSchedule />
       </m.div>
 
-      <HeroLogoDesktop initial={entrance.initial} animate={entrance.animate} />
+      <HeroLogoDesktop initial={motionState.initial} animate={motionState.animate} />
 
       <m.div
         className="pointer-events-none absolute inset-x-0 bottom-8 z-20 flex justify-center md:bottom-10"
         animate={
-          entrance.ready && entrance.shouldAnimate ? { y: [0, 8, 0] } : undefined
+          motionState.ready && motionState.shouldAnimate ? { y: [0, 8, 0] } : undefined
         }
         transition={
-          entrance.ready && entrance.shouldAnimate
+          motionState.ready && motionState.shouldAnimate
             ? { duration: 2, repeat: Infinity, ease: "easeInOut", delay: 1.4 }
             : undefined
         }
