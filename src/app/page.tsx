@@ -17,7 +17,6 @@ import {
 } from "@/components/sections/home";
 import { homeHero } from "@/data/home";
 import { church } from "@/data/church";
-import { HERO_VIDEO_URL } from "@/data/videos";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
@@ -28,23 +27,19 @@ export const metadata: Metadata = createPageMetadata({
 
 export default function HomePage() {
   return (
-    <>
-      <link rel="preload" as="video" href={HERO_VIDEO_URL} type="video/mp4" />
-
-      <HomeVideoGate videoSrc={church.heroVideo} videoSrcLite={church.heroVideoLite}>
-        <Hero {...homeHero} />
-        <HomeWelcome />
-        <HomeYouTube />
-        <HomeMission />
-        <HomeConnect />
-        <HomeMinistries />
-        <HomeEvents />
-        <HomeTestimonials />
-        <HomeVisit />
-        <HomeDonations />
-        <HomeFinalCta />
-        <Footer />
-      </HomeVideoGate>
-    </>
+    <HomeVideoGate>
+      <Hero {...homeHero} />
+      <HomeWelcome />
+      <HomeYouTube />
+      <HomeMission />
+      <HomeConnect />
+      <HomeMinistries />
+      <HomeEvents />
+      <HomeTestimonials />
+      <HomeVisit />
+      <HomeDonations />
+      <HomeFinalCta />
+      <Footer />
+    </HomeVideoGate>
   );
 }

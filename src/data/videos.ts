@@ -1,31 +1,25 @@
-const SUPABASE_VIDEOS_BASE =
-  "https://ymzqxpmiuoqbcsovwgaq.supabase.co/storage/v1/object/public/Videos/Videos";
+const LOCAL_VIDEOS_BASE = "/videos";
 
-/** Subir al reemplazar inicio.mp4 en Supabase (evita que el navegador sirva la versión en caché). */
-const HERO_VIDEO_VERSION = "2";
+export const HERO_VIDEO_URL = `${LOCAL_VIDEOS_BASE}/videoplayback.mp4`;
 
-export const HERO_VIDEO_URL = `${SUPABASE_VIDEOS_BASE}/inicio.mp4?v=${HERO_VIDEO_VERSION}`;
+export const BAPTISMS_VIDEO_URL = `${LOCAL_VIDEOS_BASE}/bautismos.mp4`;
 
-export const BAPTISMS_VIDEO_URL =
-  "https://ymzqxpmiuoqbcsovwgaq.supabase.co/storage/v1/object/public/Videos/Videos/bautismos.mp4";
-
-export const KIDS_MINISTRY_VIDEO_URL =
-  "https://ymzqxpmiuoqbcsovwgaq.supabase.co/storage/v1/object/public/Videos/Videos/ninos.mp4";
+export const KIDS_MINISTRY_VIDEO_URL = `${LOCAL_VIDEOS_BASE}/ninos.mp4`;
 
 export const videoAssets = {
   hero: HERO_VIDEO_URL,
-  welcome: `${SUPABASE_VIDEOS_BASE}/saludos.mp4`,
-  service: `${SUPABASE_VIDEOS_BASE}/servicio.mp4`,
+  welcome: `${LOCAL_VIDEOS_BASE}/saludos.mp4`,
+  service: `${LOCAL_VIDEOS_BASE}/servicio.mp4`,
   baptisms: BAPTISMS_VIDEO_URL,
-  communityService: `${SUPABASE_VIDEOS_BASE}/serv%20comunitario.mp4`,
-  salvation: `${SUPABASE_VIDEOS_BASE}/la%20salvacion.mp4`,
-  reflection: `${SUPABASE_VIDEOS_BASE}/reflexion.mp4`,
-  women: `${SUPABASE_VIDEOS_BASE}/mujeres.mp4`,
-  womenCamp: `${SUPABASE_VIDEOS_BASE}/camp%20mujeres.mp4`,
-  congregacion: `${SUPABASE_VIDEOS_BASE}/congregacion.mp4`,
-  personalChurch: `${SUPABASE_VIDEOS_BASE}/personal%20iglesia.mp4`,
+  communityService: `${LOCAL_VIDEOS_BASE}/servicio comunitario.mp4`,
+  salvation: `${LOCAL_VIDEOS_BASE}/la salvacion.mp4`,
+  reflection: `${LOCAL_VIDEOS_BASE}/reflexion.mp4`,
+  women: `${LOCAL_VIDEOS_BASE}/mujeres.mp4`,
+  womenCamp: `${LOCAL_VIDEOS_BASE}/camp mujeres.mp4`,
+  congregacion: `${LOCAL_VIDEOS_BASE}/congregacion.mp4`,
+  personalChurch: `${LOCAL_VIDEOS_BASE}/personal iglesia.mp4`,
   kidsMinistry: KIDS_MINISTRY_VIDEO_URL,
-  youthMinistry: `${SUPABASE_VIDEOS_BASE}/jovenes.mp4`,
+  youthMinistry: `${LOCAL_VIDEOS_BASE}/jovenes.mp4`,
 } as const;
 
 /** Misma URL que el hero (versión optimizada para carga). */
@@ -129,3 +123,4 @@ export const churchVideos: Record<VideoAssetKey, ChurchVideo> = {
     description: "La próxima generación creciendo en fe, propósito y comunidad.",
   },
 };
+
