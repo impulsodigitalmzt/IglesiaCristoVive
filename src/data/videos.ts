@@ -123,4 +123,3 @@ export const churchVideos: Record<VideoAssetKey, ChurchVideo> = {
     description: "La próxima generación creciendo en fe, propósito y comunidad.",
   },
 };
-
