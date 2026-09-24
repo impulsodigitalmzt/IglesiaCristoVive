@@ -39,7 +39,7 @@ export default async function SermonsPage() {
             <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <div>
                 <Badge variant="primary" className="mb-3">
-                  Más reciente
+                  {latestVideo.isLive ? "En vivo" : "Más reciente"}
                 </Badge>
                 <h2 className="font-montserrat text-2xl font-black text-text md:text-3xl">
                   {latestVideo.title}
@@ -55,7 +55,7 @@ export default async function SermonsPage() {
             <div className="mt-8 overflow-hidden rounded-[var(--radius-card-lg)] border border-border/60 bg-black shadow-lg">
               <div className="aspect-video">
                 <iframe
-                  src={`https://www.youtube-nocookie.com/embed/${latestVideo.id}?rel=0`}
+                  src={`https://www.youtube-nocookie.com/embed/${latestVideo.id}?rel=0${latestVideo.isLive ? "&autoplay=1" : ""}`}
                   title={latestVideo.title}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   referrerPolicy="strict-origin-when-cross-origin"
